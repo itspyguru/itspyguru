@@ -13,7 +13,7 @@ Welcome to my little space on Github. Here i put my thoughts and ideas into code
 - 🔭 Primary Coding language : Python
 - 🌱 Currently learning Automation and Cracking
 - 👯 I’m looking to collaborate with other programmers
-- 🥅 2023 Goals: Contribute more to Open Source projects
+- 🥅 2026 Goals: Taking [cybiqon.in](https://cybiqon.in) to great heights
 - 📫 How to reach me : The fastest way to reach me is by Telegram
 
 - ⚡ Fun fact : I am a melomaniac, an Otaku and a fan of Ruskin Bond Stories 🤣.
@@ -22,7 +22,7 @@ Welcome to my little space on Github. Here i put my thoughts and ideas into code
 	<summary>Interested in knowing more about me 👇 </summary>
 
   <br />
-  <img alt="Hououin Kyoma" align="right" src="https://github.com/pyGuru123/pyGuru123/blob/main/assets/madScientist.gif">
+  <img alt="Hououin Kyoma" align="right" src="https://github.com/itspyguru/itspyguru/blob/main/assets/madScientist.gif">
 
   I'm a Student, Developer, and Python Instructor. I like programming, 
   cryptography and designing. I am interested in extra-terrestrials and 
@@ -42,19 +42,19 @@ Welcome to my little space on Github. Here i put my thoughts and ideas into code
 
 <div style="display:flex; flex-flow: column wrap;">
 	<div style="width:50%">
-	  	<a href="https://github.com/pyguru123">
-	    		<img src="https://github-readme-stats.vercel.app/api?username=pyguru123&show_icons=true&hide=&count_private=true&title_color=0D1117&text_color=50c878&icon_color=00FFFF&bg_color=0D1117&hide_border=true&show_icons=true" alt="Prajjwal's GitHub stats"/>
+	  	<a href="https://github.com/itspyguru">
+	    		<img src="https://github-readme-stats.vercel.app/api?username=itspyguru&show_icons=true&hide=&count_private=true&title_color=0D1117&text_color=50c878&icon_color=00FFFF&bg_color=0D1117&hide_border=true&show_icons=true" alt="Prajjwal's GitHub stats"/>
 	 	 </a>
 	</div>
 	<div style="width:50%">
-	    <a href="https://github.com/pyguru123">
-		<img src="https://github-readme-streak-stats.herokuapp.com/?user=pyguru123&stroke=ffffff&background=0D1117&ring=e2fdff&fire=14FE64&currStreakNum=e2fdff&currStreakLabel=e2fdff&sideNums=e2fdff&sideLabels=50c878&dates=50c878&hide_border=true" />
+	    <a href="https://github.com/itspyguru">
+		<img src="https://github-readme-streak-stats.herokuapp.com/?user=itspyguru&stroke=ffffff&background=0D1117&ring=e2fdff&fire=14FE64&currStreakNum=e2fdff&currStreakLabel=e2fdff&sideNums=e2fdff&sideLabels=50c878&dates=50c878&hide_border=true" />
 	    </a>
         </div>
 </div>
 
-![Profile views](https://komarev.com/ghpvc/?username=pyguru123&label=PROFILE+VIEWS&style=flat-square) 
-![GitHub followers](https://img.shields.io/github/followers/pyguru123?style=social)
+![Profile views](https://komarev.com/ghpvc/?username=itspyguru&label=PROFILE+VIEWS&style=flat-square) 
+![GitHub followers](https://img.shields.io/github/followers/itspyguru?style=social)
 </details>
 
 #
@@ -67,7 +67,7 @@ Welcome to my little space on Github. Here i put my thoughts and ideas into code
 
 <!-- links -->
 
-[Whistle of Darkness]: https://dwhistle.wordpress.com
-[youtube]: https://www.youtube.com/c/pyGuru
-[instagram]: https://www.instagram.com/prajjwalpathak35
+[Cybiqon]: https://cybiqon.in
+[youtube]: https://www.youtube.com/c/itspyguru
+[instagram]: https://www.instagram.com/itspyguru
 [pinterest]: https://www.pinterest.ca/prajjwalpathak3 
