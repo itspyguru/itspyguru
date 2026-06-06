@@ -146,6 +146,24 @@
         border-left: 4px solid #00e639;
     }
     html { scroll-behavior: smooth; }
+
+    /* terminal */
+    .term-line { white-space: pre-wrap; word-break: break-word; }
+    #term-output { scrollbar-width: thin; }
+
+    /* ===== print-to-PDF resume ===== */
+    #resume-print { display: none; }
+    @media print {
+        html, body { background: #fff !important; height: auto !important; overflow: visible !important; }
+        body * { visibility: hidden !important; }
+        #resume-print, #resume-print * { visibility: visible !important; }
+        #resume-print {
+            display: block !important; position: absolute; left: 0; top: 0; width: 100%;
+            color: #111; background: #fff; font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.5;
+        }
+        .scanlines, .scan-line, .crt-overlay { display: none !important; }
+        @page { margin: 14mm; }
+    }
 </style>
 </head>
 <body class="bg-background text-on-background font-body-sm overflow-x-hidden min-h-screen selection:bg-primary-fixed-dim selection:text-on-primary-fixed">
@@ -190,7 +208,7 @@
       </div>
       <div class="flex gap-2 md:gap-3 text-primary-fixed-dim">
         <a href="https://t.me/itspyguru" target="_blank" rel="noopener" title="Telegram" class="material-symbols-outlined hover:bg-primary/10 transition-all p-1 cursor-pointer rounded">notifications_active</a>
-        <button data-view="scan" title="Terminal" class="material-symbols-outlined hover:bg-primary/10 transition-all p-1 cursor-pointer rounded">terminal</button>
+        <button data-view="terminal" title="Terminal" class="material-symbols-outlined hover:bg-primary/10 transition-all p-1 cursor-pointer rounded">terminal</button>
         <button data-view="clearance" title="Clearance" class="material-symbols-outlined hover:bg-primary/10 transition-all p-1 cursor-pointer rounded">account_circle</button>
       </div>
     </div>
@@ -264,6 +282,11 @@
       <!-- desktop grid -->
       <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image:linear-gradient(#3b4b37 1px,transparent 1px),linear-gradient(90deg,#3b4b37 1px,transparent 1px);background-size:64px 64px;"></div>
 
+      <!-- VITALS stat strip -->
+      <div class="relative z-20 px-4 md:px-8 pt-6">
+        <div class="border border-primary/20 bg-surface-container-lowest/70 backdrop-blur-md grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-outline-variant/20" id="vitals-strip"></div>
+      </div>
+
       <!-- desktop icons -->
       <div class="p-6 md:p-8 grid grid-flow-row md:grid-flow-col grid-cols-4 md:grid-cols-none md:grid-rows-6 gap-6 md:gap-8 w-fit relative z-10">
         <button data-view="scan" class="flex flex-col items-center group cursor-pointer w-16 md:w-20">
@@ -284,12 +307,12 @@
           </div>
           <span class="mt-2 text-[10px] font-data-label text-outline group-hover:text-primary-fixed text-center bg-background/50 px-1">Backend_Projects</span>
         </button>
-        <a href="https://github.com/itspyguru" target="_blank" rel="noopener" class="flex flex-col items-center group cursor-pointer w-16 md:w-20">
+        <button data-view="terminal" data-term="cat resume.pdf" class="flex flex-col items-center group cursor-pointer w-16 md:w-20">
           <div class="w-12 h-12 md:w-14 md:h-14 border border-primary/20 bg-surface-container-low flex items-center justify-center group-hover:bg-primary/10 group-hover:border-primary-fixed-dim transition-all">
             <span class="material-symbols-outlined text-primary-fixed-dim text-2xl md:text-3xl">description</span>
           </div>
           <span class="mt-2 text-[10px] font-data-label text-outline group-hover:text-primary-fixed text-center bg-background/50 px-1">Resume.pdf</span>
-        </a>
+        </button>
       </div>
 
       <!-- featured investigation window -->
@@ -309,42 +332,42 @@
           <div class="p-6 flex flex-col md:flex-row gap-6">
             <div class="flex-1 space-y-6">
               <div>
-                <h2 class="text-headline-md font-headline-md text-primary-fixed-dim">Finding #001: AI Security Auditor</h2>
+                <h2 class="text-headline-md font-headline-md text-primary-fixed-dim">Finding #001: AI Financial-Doc Engine</h2>
                 <div class="flex gap-2 mt-2 flex-wrap">
-                  <span class="px-2 py-0.5 border border-secondary-container bg-secondary-container/20 text-secondary text-[10px] font-data-label">SEVERITY: CRITICAL</span>
-                  <span class="px-2 py-0.5 border border-outline-variant bg-surface-container-high text-on-surface-variant text-[10px] font-data-label">REF: SEC-V5.0.1</span>
+                  <span class="px-2 py-0.5 border border-secondary-container bg-secondary-container/20 text-secondary text-[10px] font-data-label">IMPACT: CRITICAL</span>
+                  <span class="px-2 py-0.5 border border-outline-variant bg-surface-container-high text-on-surface-variant text-[10px] font-data-label">REF: LEADZEN-SDE2</span>
                 </div>
               </div>
               <div class="space-y-4">
                 <div>
                   <span class="text-data-label font-data-label text-outline block mb-1">IMPACT ANALYSIS</span>
-                  <p class="text-terminal-code font-terminal-code leading-relaxed">Real-time asynchronous packet inspection engine maintaining sub-50ms inference latency across high-traffic CRM integrations. Horizontal scaling via container swarm with a custom native data-pipeline extension.</p>
+                  <p class="text-terminal-code font-terminal-code leading-relaxed">Automated system that generates dynamic financial documents for Indian public-listed companies using AI agents (CrewAI) and generative-AI tooling (LangChain, Hugging Face). Cut report-generation time by <span class="text-primary-fixed-dim">50%</span> and lifted accuracy to <span class="text-primary-fixed-dim">95%+</span>.</p>
                 </div>
                 <div class="grid grid-cols-3 gap-4">
                   <div class="border border-outline-variant/30 p-2 bg-surface-container-low/50">
-                    <span class="text-[9px] font-data-label text-outline block">CORE TECH</span>
+                    <span class="text-[9px] font-data-label text-outline block">CORE</span>
                     <span class="text-data-label font-data-label text-primary-fixed-dim">FastAPI</span>
                   </div>
                   <div class="border border-outline-variant/30 p-2 bg-surface-container-low/50">
-                    <span class="text-[9px] font-data-label text-outline block">EVENT BUS</span>
-                    <span class="text-data-label font-data-label text-primary-fixed-dim">Redis</span>
+                    <span class="text-[9px] font-data-label text-outline block">AGENTS</span>
+                    <span class="text-data-label font-data-label text-primary-fixed-dim">CrewAI</span>
                   </div>
                   <div class="border border-outline-variant/30 p-2 bg-surface-container-low/50">
-                    <span class="text-[9px] font-data-label text-outline block">ORCHESTRA</span>
-                    <span class="text-data-label font-data-label text-primary-fixed-dim">K8s</span>
+                    <span class="text-[9px] font-data-label text-outline block">GEN-AI</span>
+                    <span class="text-data-label font-data-label text-primary-fixed-dim">LangChain</span>
                   </div>
                 </div>
                 <div class="pt-4 border-t border-outline-variant/30">
                   <span class="text-data-label font-data-label text-outline block mb-3">EVIDENCE REPOSITORY</span>
                   <div class="flex flex-wrap gap-3">
                     <button data-view="breach" class="flex items-center gap-2 border border-primary/30 px-3 py-1.5 hover:bg-primary/10 transition-all text-primary text-[10px] font-data-label">
-                      <span class="material-symbols-outlined text-sm">architecture</span> ARCHITECTURE
+                      <span class="material-symbols-outlined text-sm">list_alt</span> ALL_FINDINGS
                     </button>
                     <a href="https://github.com/itspyguru" target="_blank" rel="noopener" class="flex items-center gap-2 border border-primary/30 px-3 py-1.5 hover:bg-primary/10 transition-all text-primary text-[10px] font-data-label">
                       <span class="material-symbols-outlined text-sm">code</span> GITHUB
                     </a>
-                    <button data-view="scan" class="flex items-center gap-2 border border-primary/30 px-3 py-1.5 hover:bg-primary/10 transition-all text-primary text-[10px] font-data-label">
-                      <span class="material-symbols-outlined text-sm">play_circle</span> DEMO
+                    <button data-view="terminal" data-term="cat resume.pdf" class="flex items-center gap-2 border border-primary/30 px-3 py-1.5 hover:bg-primary/10 transition-all text-primary text-[10px] font-data-label">
+                      <span class="material-symbols-outlined text-sm">terminal</span> RESUME
                     </button>
                   </div>
                 </div>
@@ -419,63 +442,64 @@
         <!-- agents -->
         <div class="col-span-12 lg:col-span-5 space-y-gutter">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="glass-panel p-panel-padding cursor-pointer">
+            <div class="glass-panel p-panel-padding cursor-pointer" data-view="breach">
               <div class="flex justify-between items-start mb-2">
-                <span class="material-symbols-outlined text-primary text-xl">description</span>
-                <span class="text-[8px] text-primary/40 font-data-label">V.2.4.0</span>
+                <span class="material-symbols-outlined text-primary text-xl">smart_toy</span>
+                <span class="text-[8px] text-primary/40 font-data-label">CREWAI</span>
               </div>
-              <h3 class="text-data-label font-terminal-bold text-primary mb-1">Resume Analyzer</h3>
-              <p class="text-[10px] text-outline">Parsing HR datasets for heuristic skill matching.</p>
-              <div class="mt-3 h-1 bg-surface-container-highest w-full overflow-hidden"><div class="h-full bg-primary-fixed-dim w-3/4 animate-pulse"></div></div>
+              <h3 class="text-data-label font-terminal-bold text-primary mb-1">Financial-Doc Engine</h3>
+              <p class="text-[10px] text-outline">Dynamic financial documents via AI agents + LangChain &amp; Hugging Face.</p>
+              <div class="mt-3 h-1 bg-surface-container-highest w-full overflow-hidden"><div class="h-full bg-primary-fixed-dim w-[95%] animate-pulse"></div></div>
             </div>
-            <div class="glass-panel p-panel-padding cursor-pointer">
+            <div class="glass-panel p-panel-padding cursor-pointer" data-view="breach">
               <div class="flex justify-between items-start mb-2">
-                <span class="material-symbols-outlined text-primary text-xl">dock</span>
-                <span class="text-[8px] text-primary/40 font-data-label">V.1.1.2</span>
+                <span class="material-symbols-outlined text-primary text-xl">database</span>
+                <span class="text-[8px] text-primary/40 font-data-label">PIPELINE</span>
               </div>
-              <h3 class="text-data-label font-terminal-bold text-primary mb-1">Workspace Assistant</h3>
-              <p class="text-[10px] text-outline">Optimizing IDE layouts and task prioritization.</p>
-              <div class="mt-3 h-1 bg-surface-container-highest w-full"><div class="h-full bg-primary-fixed-dim w-1/2"></div></div>
+              <h3 class="text-data-label font-terminal-bold text-primary mb-1">Company Data Pipeline</h3>
+              <p class="text-[10px] text-outline">Scrape → clean → store → analyze → realtime + cache for listed companies.</p>
+              <div class="mt-3 h-1 bg-surface-container-highest w-full"><div class="h-full bg-primary-fixed-dim w-4/5"></div></div>
             </div>
-            <div class="glass-panel p-panel-padding cursor-pointer border-primary-fixed-dim shadow-[0_0_10px_rgba(0,230,57,0.15)]">
+            <div class="glass-panel p-panel-padding cursor-pointer border-primary-fixed-dim shadow-[0_0_10px_rgba(0,230,57,0.15)]" data-view="breach">
               <div class="flex justify-between items-start mb-2">
                 <span class="material-symbols-outlined text-primary text-xl">policy</span>
-                <span class="text-[8px] text-primary/40 font-data-label">V.5.0.1</span>
+                <span class="text-[8px] text-primary/40 font-data-label">PENTEST</span>
               </div>
-              <h3 class="text-data-label font-terminal-bold text-primary mb-1">AI Security Auditor</h3>
-              <p class="text-[10px] text-outline">Conducting real-time penetration testing simulations.</p>
+              <h3 class="text-data-label font-terminal-bold text-primary mb-1">Security Auditor</h3>
+              <p class="text-[10px] text-outline">Pentesting + vuln audits (Burp, nmap, sublist3r) on production web apps.</p>
               <div class="mt-3 flex gap-1">
                 <div class="h-1 bg-primary-fixed-dim w-2"></div><div class="h-1 bg-primary-fixed-dim w-2"></div>
                 <div class="h-1 bg-primary-fixed-dim w-2"></div><div class="h-1 bg-outline-variant w-2"></div>
               </div>
             </div>
-            <div class="glass-panel p-panel-padding cursor-pointer">
+            <div class="glass-panel p-panel-padding cursor-pointer" data-view="breach">
               <div class="flex justify-between items-start mb-2">
-                <span class="material-symbols-outlined text-primary text-xl">mail</span>
-                <span class="text-[8px] text-primary/40 font-data-label">V.0.9.8</span>
+                <span class="material-symbols-outlined text-primary text-xl">smart_button</span>
+                <span class="text-[8px] text-primary/40 font-data-label">AUTOMATION</span>
               </div>
-              <h3 class="text-data-label font-terminal-bold text-primary mb-1">CRM Email Agent</h3>
-              <p class="text-[10px] text-outline">Automated outreach via predictive linguistics.</p>
-              <div class="mt-3 h-1 bg-surface-container-highest w-full"><div class="h-full bg-primary-fixed-dim w-1/4"></div></div>
+              <h3 class="text-data-label font-terminal-bold text-primary mb-1">Scraping &amp; Bots</h3>
+              <p class="text-[10px] text-outline">10,000+ data points/day via Selenium, BeautifulSoup &amp; Apps Script.</p>
+              <div class="mt-3 h-1 bg-surface-container-highest w-full"><div class="h-full bg-primary-fixed-dim w-[88%]"></div></div>
             </div>
-            <div class="glass-panel p-panel-padding cursor-pointer col-span-1 md:col-span-2">
+            <div class="glass-panel p-panel-padding cursor-pointer col-span-1 md:col-span-2" data-view="breach">
               <div class="flex items-center justify-between mb-2">
                 <div class="flex items-center gap-2">
-                  <span class="material-symbols-outlined text-primary text-xl">menu_book</span>
-                  <h3 class="text-data-label font-terminal-bold text-primary">PDF Research Agent</h3>
+                  <span class="material-symbols-outlined text-primary text-xl">monitoring</span>
+                  <h3 class="text-data-label font-terminal-bold text-primary">FastAPI Reporting Engine</h3>
                 </div>
-                <span class="text-[8px] text-primary/40 font-data-label">DIRECT_SYSTEM_ACCESS</span>
+                <span class="text-[8px] text-primary/40 font-data-label">PRODUCTION</span>
               </div>
               <div class="flex gap-4">
                 <div class="flex-1">
-                  <p class="text-[10px] text-outline mb-2">Multi-document context vectoring active. Analyzing 1,240 technical papers...</p>
-                  <div class="flex gap-2">
-                    <span class="text-[8px] border border-outline-variant px-1 text-outline">PyTorch</span>
-                    <span class="text-[8px] border border-outline-variant px-1 text-outline">Transformers</span>
+                  <p class="text-[10px] text-outline mb-2">Financial reporting system + stock-market analyzers. 50% faster reports, 99% document accuracy.</p>
+                  <div class="flex gap-2 flex-wrap">
+                    <span class="text-[8px] border border-outline-variant px-1 text-outline">FastAPI</span>
+                    <span class="text-[8px] border border-outline-variant px-1 text-outline">MongoDB</span>
+                    <span class="text-[8px] border border-outline-variant px-1 text-outline">Redis</span>
                   </div>
                 </div>
                 <div class="w-16 h-10 bg-primary/5 border border-primary/20 flex items-center justify-center">
-                  <span class="material-symbols-outlined text-primary-fixed-dim text-lg animate-bounce">downloading</span>
+                  <span class="material-symbols-outlined text-primary-fixed-dim text-lg animate-bounce">query_stats</span>
                 </div>
               </div>
             </div>
@@ -527,7 +551,7 @@
             <div class="px-4 pt-2 flex gap-2 flex-wrap bg-surface-container-lowest/60" id="suggestions">
               <button class="suggestion text-[9px] border border-primary/30 px-2 py-1 text-primary hover:bg-primary/10 font-data-label">hardest project</button>
               <button class="suggestion text-[9px] border border-primary/30 px-2 py-1 text-primary hover:bg-primary/10 font-data-label">your stack</button>
-              <button class="suggestion text-[9px] border border-primary/30 px-2 py-1 text-primary hover:bg-primary/10 font-data-label">who are you</button>
+              <button class="suggestion text-[9px] border border-primary/30 px-2 py-1 text-primary hover:bg-primary/10 font-data-label">experience</button>
               <button class="suggestion text-[9px] border border-primary/30 px-2 py-1 text-primary hover:bg-primary/10 font-data-label">contact</button>
             </div>
             <!-- input -->
@@ -549,7 +573,7 @@
         <div>
           <h1 class="text-3xl md:text-display-lg font-display-lg text-primary-fixed-dim tracking-tighter">FINDINGS LOG</h1>
           <div class="flex items-center gap-3 mt-1 flex-wrap">
-            <span class="bg-secondary-container/20 text-secondary px-2 py-0.5 text-[10px] border border-secondary/30 font-data-label">5 ACTIVE THREATS</span>
+            <span class="bg-secondary-container/20 text-secondary px-2 py-0.5 text-[10px] border border-secondary/30 font-data-label"><span id="threat-count">0</span> ARTIFACTS RECOVERED</span>
             <span class="bg-surface-container-high text-outline px-2 py-0.5 text-[10px] border border-outline-variant/30 font-data-label">~/breach/projects</span>
           </div>
         </div>
@@ -609,6 +633,12 @@
                 <a href="https://www.instagram.com/itspyguru/" target="_blank" rel="noopener" title="Instagram" class="flex items-center justify-center border border-primary/30 py-2 hover:bg-primary/10 text-primary-fixed-dim transition-all"><span class="material-symbols-outlined text-base">photo_camera</span></a>
                 <a href="https://cybiqon.in" target="_blank" rel="noopener" title="cybiqon.in" class="flex items-center justify-center border border-primary/30 py-2 hover:bg-primary/10 text-primary-fixed-dim transition-all"><span class="material-symbols-outlined text-base">public</span></a>
               </div>
+              <!-- direct channels -->
+              <div class="border border-outline-variant/30 bg-surface-container-low p-3 space-y-2 text-[10px] font-data-label">
+                <div class="flex items-center gap-2 text-outline"><span class="material-symbols-outlined text-sm text-primary-fixed-dim">mail</span><a href="mailto:prajjwalpathak35@gmail.com" class="text-primary-fixed-dim hover:underline break-all">prajjwalpathak35@gmail.com</a></div>
+                <div class="flex items-center gap-2 text-outline"><span class="material-symbols-outlined text-sm text-primary-fixed-dim">location_on</span><span>Varanasi, India</span></div>
+                <div class="flex items-center gap-2 text-outline"><span class="material-symbols-outlined text-sm text-primary-fixed-dim">send</span><a href="https://t.me/itspyguru" target="_blank" rel="noopener" class="text-primary-fixed-dim hover:underline">@itspyguru (fastest)</a></div>
+              </div>
             </div>
 
             <!-- right: assessment -->
@@ -620,18 +650,11 @@
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="p-4 bg-surface-container border border-outline-variant/30 space-y-3">
                   <div class="flex items-center gap-2 text-primary-fixed-dim"><span class="material-symbols-outlined text-[18px]">analytics</span><span class="text-terminal-bold">RISK ASSESSMENT</span></div>
-                  <p class="text-body-sm text-on-surface-variant leading-relaxed">Student, developer &amp; Python instructor. Exhibits exceptional cognitive patterns in architectural synthesis. Heuristics flag subject as an <span class="text-primary-fixed-dim font-bold">EXCEPTIONAL BUILDER</span>. No malicious intent — orientation purely constructive. Currently scaling <span class="text-primary-fixed-dim">cybiqon.in</span>.</p>
+                  <p class="text-body-sm text-on-surface-variant leading-relaxed">Software Engineer (SDE-2) with 1+ yr scaling backend &amp; automation at <span class="text-primary-fixed-dim">Leadzen.ai</span>. Achieved <span class="text-primary-fixed-dim">90%</span> reduction in manual workloads and <span class="text-primary-fixed-dim">30%</span> system-performance gains. Heuristics flag subject as an <span class="text-primary-fixed-dim font-bold">EXCEPTIONAL BUILDER</span> — no malicious intent, purely constructive. Currently scaling <span class="text-primary-fixed-dim">cybiqon.in</span>.</p>
                 </div>
                 <div class="p-4 bg-surface-container border border-outline-variant/30 space-y-3">
                   <div class="flex items-center gap-2 text-primary-fixed-dim"><span class="material-symbols-outlined text-[18px]">psychology</span><span class="text-terminal-bold">PRIMARY SKILLS</span></div>
-                  <div class="flex flex-wrap gap-2">
-                    <span class="px-2 py-0.5 border border-primary/40 text-[10px] text-primary-fixed-dim bg-primary/5 uppercase">Python</span>
-                    <span class="px-2 py-0.5 border border-primary/40 text-[10px] text-primary-fixed-dim bg-primary/5 uppercase">AI / ML</span>
-                    <span class="px-2 py-0.5 border border-primary/40 text-[10px] text-primary-fixed-dim bg-primary/5 uppercase">Backend Arch</span>
-                    <span class="px-2 py-0.5 border border-primary/40 text-[10px] text-primary-fixed-dim bg-primary/5 uppercase">Cybersecurity</span>
-                    <span class="px-2 py-0.5 border border-primary/40 text-[10px] text-primary-fixed-dim bg-primary/5 uppercase">Automation</span>
-                    <span class="px-2 py-0.5 border border-primary/40 text-[10px] text-primary-fixed-dim bg-primary/5 uppercase">Cryptography</span>
-                  </div>
+                  <div class="flex flex-wrap gap-2" id="skills-chips"></div>
                 </div>
               </div>
               <div class="text-center py-5 border-y border-outline-variant/20">
@@ -639,10 +662,14 @@
                 <h2 class="text-headline-md flash-text font-bold tracking-widest uppercase">IMMEDIATE RECRUITMENT</h2>
               </div>
               <div class="flex flex-col items-center gap-4">
-                <a href="https://t.me/itspyguru" target="_blank" rel="noopener" class="group relative px-8 md:px-12 py-4 md:py-5 bg-primary-fixed-dim text-on-primary-fixed font-terminal-bold text-base md:text-lg overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_#00e63944]">
+                <a href="mailto:prajjwalpathak35@gmail.com" class="group relative px-8 md:px-12 py-4 md:py-5 bg-primary-fixed-dim text-on-primary-fixed font-terminal-bold text-base md:text-lg overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_#00e63944]">
                   <span class="relative z-10">[ESTABLISH COMMUNICATION]</span>
                   <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
                 </a>
+                <div class="flex items-center gap-3 flex-wrap justify-center">
+                  <button id="download-resume" class="flex items-center gap-2 border border-primary/40 px-4 py-2 text-primary-fixed-dim text-[11px] font-data-label hover:bg-primary/10 transition-all"><span class="material-symbols-outlined text-sm">download</span> DOWNLOAD_RESUME</button>
+                  <a href="https://t.me/itspyguru" target="_blank" rel="noopener" class="flex items-center gap-2 border border-primary/40 px-4 py-2 text-primary-fixed-dim text-[11px] font-data-label hover:bg-primary/10 transition-all"><span class="material-symbols-outlined text-sm">send</span> TELEGRAM</a>
+                </div>
                 <div class="flex items-center gap-4 text-outline text-[10px] flex-wrap justify-center">
                   <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-primary-fixed-dim animate-pulse"></span>ENCRYPTED_LINE_ACTIVE</span>
                   <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-primary-fixed-dim animate-pulse"></span>SECURE_HANDSHAKE_READY</span>
@@ -651,13 +678,77 @@
             </div>
           </div>
 
-          <div class="mt-8 pt-4 border-t border-outline-variant/30 flex flex-wrap justify-between items-center gap-2 text-[9px] text-outline/50 font-terminal-code uppercase">
+          <!-- ===== DOSSIER: EXPERIENCE ===== -->
+          <div class="mt-10 pt-6 border-t border-outline-variant/30">
+            <div class="flex items-center gap-2 text-primary-fixed-dim mb-5">
+              <span class="material-symbols-outlined text-[18px]">work_history</span>
+              <span class="text-terminal-bold tracking-widest">~/career/uptime.log</span>
+            </div>
+            <div class="space-y-4" id="experience-box"></div>
+          </div>
+
+          <!-- ===== DOSSIER: EDUCATION + CERTIFICATIONS ===== -->
+          <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <div class="flex items-center gap-2 text-primary-fixed-dim mb-3">
+                <span class="material-symbols-outlined text-[18px]">school</span>
+                <span class="text-terminal-bold tracking-widest">EDUCATION</span>
+              </div>
+              <div class="space-y-3" id="education-box"></div>
+            </div>
+            <div>
+              <div class="flex items-center gap-2 text-primary-fixed-dim mb-3">
+                <span class="material-symbols-outlined text-[18px]">verified</span>
+                <span class="text-terminal-bold tracking-widest">CERTIFICATIONS</span>
+              </div>
+              <div class="space-y-2" id="certs-box"></div>
+            </div>
+          </div>
+
+          <div class="mt-10 pt-4 border-t border-outline-variant/30 flex flex-wrap justify-between items-center gap-2 text-[9px] text-outline/50 font-terminal-code uppercase">
             <div class="flex gap-4 flex-wrap"><span>LATENCY: 12ms</span><span>BITRATE: 4.8 GB/S</span><span>PACKET_LOSS: 0.00%</span></div>
             <div>© PRAJJWAL_OS_SYSTEMS_2026_V3.0</div>
           </div>
         </div>
       </div>
      </div>
+    </section>
+
+    <!-- ============ VIEW: TERMINAL ============ -->
+    <section id="view-terminal" class="view relative z-10 px-margin-page">
+      <div class="flex justify-between items-end mb-6 border-l-2 border-primary-fixed-dim pl-4">
+        <div>
+          <h1 class="text-3xl md:text-display-lg font-display-lg text-primary-fixed-dim tracking-tighter">TERMINAL</h1>
+          <div class="flex items-center gap-3 mt-1 flex-wrap">
+            <span class="bg-primary/20 text-primary px-2 py-0.5 text-[10px] border border-primary/30 font-data-label">SHELL: BASH</span>
+            <span class="bg-surface-container-high text-outline px-2 py-0.5 text-[10px] border border-outline-variant/30 font-data-label">type 'help'</span>
+          </div>
+        </div>
+        <div class="text-right hidden sm:block">
+          <p class="text-data-label font-data-label text-outline uppercase">tty</p>
+          <p class="text-primary-fixed-dim font-terminal-bold">/dev/pts/0</p>
+        </div>
+      </div>
+
+      <div class="glass-panel border-primary shadow-[0_0_20px_rgba(0,255,65,0.05)] flex flex-col h-[62vh] min-h-[440px]">
+        <div class="bg-surface-container-highest px-4 py-2 border-b border-outline-variant/50 flex justify-between items-center">
+          <div class="flex items-center gap-3">
+            <div class="flex gap-1">
+              <div class="w-2.5 h-2.5 rounded-full bg-error/50"></div>
+              <div class="w-2.5 h-2.5 rounded-full bg-tertiary-fixed-dim/50"></div>
+              <div class="w-2.5 h-2.5 rounded-full bg-primary-fixed-dim/50"></div>
+            </div>
+            <span class="text-data-label font-data-label text-primary-fixed-dim">prajjwal@prajjwal-os: ~/root — bash</span>
+          </div>
+          <button id="term-clear" class="text-[9px] text-outline hover:text-primary-fixed font-data-label border border-outline-variant/40 px-2 py-0.5">CLEAR</button>
+        </div>
+        <div id="term-output" class="flex-1 overflow-y-auto p-4 font-terminal-code text-[12px] md:text-[13px] text-primary-fixed-dim/90 bg-[#0a0a0a]/60 leading-relaxed"></div>
+        <div class="px-3 pt-2 flex gap-2 flex-wrap bg-surface-container-lowest/60" id="term-chips"></div>
+        <form id="term-form" class="flex items-center gap-2 p-3 border-t border-primary/20 bg-surface-container-lowest">
+          <span class="text-primary-fixed-dim font-terminal-bold text-[12px] whitespace-nowrap">prajjwal@os:~$</span>
+          <input id="term-input" class="flex-1 bg-transparent border-none focus:ring-0 text-terminal-code text-primary placeholder:text-primary/20" placeholder="type a command... (help)" type="text" autocomplete="off" spellcheck="false"/>
+        </form>
+      </div>
     </section>
 
   </main>
@@ -669,7 +760,7 @@
       <span class="text-data-label font-data-label text-outline group-hover:text-primary-fixed hidden sm:block">START</span>
     </button>
     <div class="h-8 w-px bg-outline-variant/30 hidden sm:block"></div>
-    <button data-view="scan" class="task-btn flex flex-col items-center justify-center text-outline p-2 hover:text-primary-fixed hover:scale-105 transition-transform cursor-pointer">
+    <button data-view="terminal" class="task-btn flex flex-col items-center justify-center text-outline p-2 hover:text-primary-fixed hover:scale-105 transition-transform cursor-pointer">
       <span class="material-symbols-outlined">code</span><span class="text-[8px] font-data-label mt-0.5">TERMINAL</span>
     </button>
     <button data-view="breach" class="task-btn flex flex-col items-center justify-center text-outline p-2 hover:text-primary-fixed hover:scale-105 transition-transform cursor-pointer">
@@ -687,15 +778,128 @@
 </div>
 
 <script>
+/* =========================================================
+   RESUME — single source of truth (every view + terminal reads this)
+   NOTE: numbers standardized on resume headline figures
+   (20k YouTube / 10k Telegram / 4.5k Udemy).
+   TODO(prajjwal): replace the 3 flagged links below with real URLs.
+========================================================= */
+const LINKS = {
+  github: "https://github.com/itspyguru",
+  linkedin: "https://www.linkedin.com/in/itspyguru/",
+  youtube: "https://www.youtube.com/@itspyguru",
+  telegram: "https://t.me/itspyguru",
+  instagram: "https://www.instagram.com/itspyguru/",
+  pinterest: "https://www.pinterest.ca/itspyguru",
+  cybiqon: "https://cybiqon.in",
+  email: "mailto:prajjwalpathak35@gmail.com",
+  udemy: "https://www.udemy.com/user/itspyguru/",   // TODO: real Udemy course URL
+  pypi: "https://pypi.org/project/decrypto/",        // TODO: confirm Decrypto PyPI slug
+  tgbot: "https://t.me/itspyguru"                    // TODO: real tg-api bot link
+};
+const RESUME = {
+  name: "Prajjwal Pathak",
+  alias: "pyGuru",
+  title: "Software Engineer (SDE-2) · AI & Security",
+  location: "Varanasi, India",
+  email: "prajjwalpathak35@gmail.com",
+  links: LINKS,
+  objective: "Results-driven Software Engineer with 1+ year of specialized experience in backend development and automation. Expertise in Python, FastAPI and API design, with a track record of streamlining operations — 90% reduction in manual workloads and 30% gains in system performance. Builds scalable, reliable solutions that optimize workflows and improve data accuracy.",
+  bioShort: "Prajjwal Pathak (pyGuru) — SDE-2 @ Leadzen.ai. Backend, automation & AI agents. Python instructor with 20k+ on YouTube. Building cybiqon.in.",
+  bioLong: "Student, developer & Python instructor. I build AI agents, backend systems and security tooling. I like cryptography, design and photography, self-study theoretical physics, and I'm an Otaku, a melomaniac and a Ruskin Bond fan.",
+  stats: [
+    { label: "WORKLOAD_AUTOMATED", value: 90, suffix: "%" },
+    { label: "FASTER_REPORTS", value: 50, suffix: "%" },
+    { label: "YT_SUBSCRIBERS", value: 20, suffix: "K+" },
+    { label: "UDEMY_ENROLLS", value: 4.5, suffix: "K+" },
+    { label: "DATA_PTS/DAY", value: 10, suffix: "K+" }
+  ],
+  experience: [
+    { role: "Software Development Engineer (SDE-2)", org: "Leadzen.ai", period: "Oct 2024 — Present", bullets: [
+      "Built an automated system generating dynamic financial documents using AI agents (CrewAI) + generative-AI tooling (LangChain, Hugging Face).",
+      "Designed end-to-end backend for Indian public-listed companies: scraping, cleaning, storage, analysis, realtime updates & caching for the company web app.",
+      "Ran a full security audit & penetration test of the company website — identified vulnerabilities and helped implement fixes." ] },
+    { role: "Software Development Engineer (SDE-1)", org: "Leadzen.ai", period: "Sep 2023 — Sep 2024", bullets: [
+      "Spearheaded a Python + FastAPI financial reporting system — cut report-generation time 50%, improved accuracy 20%.",
+      "Automated financial modeling for Indian public companies — reduced manual effort 35% at 95%+ accuracy.",
+      "Built document processors, stock-market analyzers & reporting tools — +40% processing efficiency, -25% retrieval time.",
+      "Optimized backend, shipped generative-AI solutions & automation scripts — +15% revenue, automated 100% of client requests." ] },
+    { role: "Software Engineering Intern", org: "Leadzen.ai", period: "Feb 2023 — Aug 2023", bullets: [
+      "Automation via Google Apps Script — cut manual workloads 90%, +80% task efficiency.",
+      "Web scrapers processing 10,000+ data points/day — +35% acquisition speed.",
+      "Document validators, bots & APIs in Python/AppScript — 99% accuracy, -85% error rate.",
+      "Automated reporting & comms for marketing/ops — saved 30+ hrs/week, +50% productivity." ] },
+    { role: "Research Intern", org: "PixelNib", period: "Sep 2022 — Nov 2022", bullets: [
+      "Shipped a full WordPress site for a client end-to-end (setup → payments → deploy) including a security audit.",
+      "Built a web/Telegram app translating Bhagavad Gita shlokas in real-time across languages, with GenAI Q&A.",
+      "Built a movies Telegram bot serving 3,000+ users." ] },
+    { role: "Content Creator & Educator", org: "pyGuru — YouTube & Udemy", period: "Ongoing", bullets: [
+      "20,000+ YouTube subscribers & 10,000+ Telegram members — coding, dev & ethical-hacking content.",
+      "Ethical Hacking course on Udemy — 4,500+ enrollments at a 4.7 instructor rating." ] }
+  ],
+  projects: [
+    { id:"001", slug:"financial-doc-engine", type:"FLAGSHIP", tone:"#ffb4ab", ref:"LEADZEN", title:"AI Financial-Doc Engine",
+      desc:"Automated generation of dynamic financial documents for Indian listed companies using CrewAI agents + LangChain & Hugging Face. 50% faster, 95%+ accuracy.",
+      tech:["FastAPI","CrewAI","LangChain","HuggingFace"], link:LINKS.github },
+    { id:"002", slug:"data-pipeline", type:"BACKEND", tone:"#00e639", ref:"LEADZEN", title:"Company Data Pipeline",
+      desc:"End-to-end pipeline for listed companies — scraping, cleaning, storage, analysis, realtime updates & caching powering the company web app.",
+      tech:["Python","MongoDB","Redis","FastAPI"], link:LINKS.github },
+    { id:"003", slug:"security-audit", type:"SECURITY", tone:"#fbbc00", ref:"AUDIT", title:"Web-App Security Audit",
+      desc:"Comprehensive security audit & penetration test of production web apps — found vulnerabilities and drove remediation.",
+      tech:["Burp Suite","nmap","sublist3r","Kali"], link:LINKS.github },
+    { id:"004", slug:"telegram-bot-api", type:"OPEN-SOURCE", tone:"#00e639", ref:"TG-API", title:"Telegram Bot API",
+      desc:"End-to-end Telegram bot + backend APIs bringing LLMs/GenAI apps, movies and a Python code-executor to Telegram for free via reverse engineering. 3,000+ users.",
+      tech:["Python","FastAPI","Telegram","LLM"], link:LINKS.tgbot },
+    { id:"005", slug:"decrypto", type:"PYPI", tone:"#fbbc00", ref:"PKG", title:"Decrypto",
+      desc:"Lightweight Python PyPI package providing state-of-the-art encryption/decryption — simple, easy to use, drop-in for any Python project.",
+      tech:["Python","Cryptography","PyPI"], link:LINKS.pypi },
+    { id:"006", slug:"gita-translator", type:"GEN-AI", tone:"#00e639", ref:"PIXELNIB", title:"Gita Shloka Translator",
+      desc:"Web/Telegram app translating Bhagavad Gita shlokas in real-time across languages, with GenAI-powered interactive Q&A.",
+      tech:["Python","GenAI","Telegram"], link:LINKS.github },
+    { id:"007", slug:"movies-bot", type:"BOT", tone:"#84967e", ref:"TG", title:"Movies Telegram Bot",
+      desc:"Telegram bot delivering the latest movies & web-series to 3,000+ users.",
+      tech:["Python","Telegram"], link:LINKS.github },
+    { id:"008", slug:"cybiqon", type:"VENTURE", tone:"#84967e", ref:"2026", title:"cybiqon.in",
+      desc:"Flagship 2026 venture — building & scaling cybiqon across security & automation.",
+      tech:["Web","Security","Product"], link:LINKS.cybiqon }
+  ],
+  topSkills: ["Python","FastAPI","CrewAI","LangChain","Generative AI","Backend Arch","Cybersecurity","Automation"],
+  skills: {
+    "Languages": ["Python","JavaScript","C#"],
+    "Frameworks": ["Flask","FastAPI","LangChain","CrewAI","Redis"],
+    "Databases": ["MongoDB","MySQL"],
+    "Web": ["HTML","CSS","REST APIs","Generative AI"],
+    "Version Control": ["Git","GitHub","BitBucket"],
+    "Automation & Scraping": ["Selenium","BeautifulSoup","Apps Script","Telegram Bots"],
+    "Ethical Hacking": ["Burp Suite","SilverBullet","nmap","sublist3r","Kali Linux"]
+  },
+  education: [
+    { degree:"M.Sc. Computer Science", school:"AKTU University", period:"2021 — 2023" },
+    { degree:"B.Sc. Computer Science", school:"CSJM University", period:"2018 — 2021" }
+  ],
+  certs: [
+    { title:"Cyber Security & Bug Bounty", body:"IIT Kanpur — hands-on vulnerability identification, reporting & ethical-hacking techniques." },
+    { title:"Geoprocessing using Python", body:"IIRS / ISRO — geospatial data analysis & processing in Python." },
+    { title:"Full-Stack Web Dev with Flask", body:"Packt — dynamic web apps, front+back integration, DB & deployment." },
+    { title:"Unit Testing & TDD with Python", body:"LinkedIn — robust test cases & test-driven development." }
+  ],
+  extras: [
+    "Write blog posts & video tutorials — 20k+ YouTube, 10k+ Telegram.",
+    "Contribute to open-source projects.",
+    "Organize The Hacker Meetup (Kanpur Chapter).",
+    "Participated & organized college coding competitions & hackathons."
+  ]
+};
+
 /* ===================== BOOT SEQUENCE ===================== */
 const bootLogs = [
   "Initializing kernel 5.15.0-71-generic...",
   "Loading PrajjwalOS Core V3.0 [STABLE]",
-  "Checking Intelligence Database consistency... [OK]",
-  "Activating AI Neural Agents (N-GINE-7)... [OK]",
-  "Establishing encrypted handshake with Node-X...",
+  "Mounting /career: Leadzen.ai [SDE-2] ... [OK]",
+  "Activating AI Neural Agents (CrewAI + LangChain)... [OK]",
+  "Spinning up FastAPI backend services... [OK]",
   "Decrypting RSA-4096 master keys...",
-  "Scanning network topography...",
+  "Indexing 10,000+ scraped data points/day...",
   "Alert: Unexpected protocol detected on Port 8080.",
   "Loading Incident Response Module...",
   "Boot sequence complete. Welcome back, Admin."
@@ -743,7 +947,7 @@ document.getElementById('skip-boot').addEventListener('click', revealOS);
 window.addEventListener('load', ()=> setTimeout(printLog, 400));
 
 /* ===================== VIEW ROUTER ===================== */
-const views = ['root','scan','breach','clearance'];
+const views = ['root','scan','breach','clearance','terminal'];
 function showView(name){
   if(!views.includes(name)) name='root';
   views.forEach(v=>{
@@ -756,10 +960,16 @@ function showView(name){
   if(window.innerWidth < 1024) document.getElementById('sidebar').classList.add('-translate-x-full');
   history.replaceState(null,'','#'+name);
   window.scrollTo({top:0,behavior:'smooth'});
+  if(name==='root'){ setTimeout(animateVitals, 150); }
+  if(name==='terminal'){ termInit(); setTimeout(()=>{ const i=document.getElementById('term-input'); if(i) i.focus(); }, 80); }
 }
 document.addEventListener('click', (e)=>{
   const t = e.target.closest('[data-view]');
-  if(t){ e.preventDefault(); showView(t.dataset.view); }
+  if(t){
+    e.preventDefault();
+    showView(t.dataset.view);
+    if(t.dataset.term){ setTimeout(()=>runCommand(t.dataset.term, true), 120); }
+  }
 });
 
 /* ===================== SIDEBAR (mobile) ===================== */
@@ -780,32 +990,12 @@ function updateClock(){
 }
 setInterval(updateClock,1000); updateClock();
 
-/* ===================== FINDINGS / PROJECTS ===================== */
-const findings = [
-  { id:'001', sev:'CRITICAL', sevClass:'secondary', ref:'SEC-V5.0.1', title:'AI Security Auditor',
-    desc:'Real-time penetration-testing simulation engine. Async packet inspection at sub-50ms inference latency across high-traffic CRM integrations.',
-    tech:['FastAPI','Redis','Kubernetes'], link:'https://github.com/itspyguru' },
-  { id:'002', sev:'HIGH', sevClass:'tertiary-fixed-dim', ref:'HR-V2.4.0', title:'Resume Analyzer',
-    desc:'Parses HR datasets and performs heuristic skill-matching to rank candidates against role vectors with explainable scoring.',
-    tech:['Python','NLP','scikit-learn'], link:'https://github.com/itspyguru' },
-  { id:'003', sev:'MEDIUM', sevClass:'primary-fixed-dim', ref:'WS-V1.1.2', title:'Workspace Assistant',
-    desc:'Optimizes IDE layouts and prioritizes tasks from natural-language intent. A copilot for the developer environment itself.',
-    tech:['Python','LLM','Automation'], link:'https://github.com/itspyguru' },
-  { id:'004', sev:'HIGH', sevClass:'tertiary-fixed-dim', ref:'CRM-V0.9.8', title:'CRM Email Agent',
-    desc:'Automated outreach via predictive linguistics. Drafts, schedules and personalizes campaigns from a lead pipeline.',
-    tech:['FastAPI','MongoDB','LLM'], link:'https://github.com/itspyguru' },
-  { id:'005', sev:'INFO', sevClass:'outline', ref:'PDF-RAG', title:'PDF Research Agent',
-    desc:'Multi-document context vectoring across 1,240+ technical papers. Retrieval-augmented Q&A over a private research corpus.',
-    tech:['PyTorch','Transformers','RAG'], link:'https://github.com/itspyguru' },
-  { id:'006', sev:'INFO', sevClass:'outline', ref:'CYB-2026', title:'cybiqon.in',
-    desc:'Flagship venture — 2026 mission objective. Building and scaling cybiqon to great heights across security & automation.',
-    tech:['Web','Security','Product'], link:'https://cybiqon.in' },
-];
+/* ===================== PROJECTS (BREACH) ===================== */
 const grid = document.getElementById('findings-grid');
-grid.innerHTML = findings.map(f=>`
+grid.innerHTML = RESUME.projects.map(p=>`
   <div class="glass-panel flex flex-col">
     <div class="bg-surface-container-highest px-4 py-2 border-b border-outline-variant/50 flex justify-between items-center">
-      <span class="text-data-label font-data-label text-primary-fixed-dim truncate">~/breach/finding_${f.id}</span>
+      <span class="text-data-label font-data-label text-primary-fixed-dim truncate">~/breach/${p.slug}</span>
       <div class="flex gap-2 shrink-0">
         <div class="w-2.5 h-2.5 border border-outline"></div>
         <div class="w-2.5 h-2.5 border border-outline"></div>
@@ -813,28 +1003,49 @@ grid.innerHTML = findings.map(f=>`
       </div>
     </div>
     <div class="p-5 flex flex-col flex-1">
-      <div class="flex items-start justify-between gap-3">
-        <h3 class="text-headline-md font-headline-md text-primary-fixed-dim text-lg leading-tight">Finding #${f.id}: ${f.title}</h3>
-      </div>
+      <h3 class="text-headline-md font-headline-md text-primary-fixed-dim text-lg leading-tight">Finding #${p.id}: ${p.title}</h3>
       <div class="flex gap-2 mt-2 mb-3 flex-wrap">
-        <span class="px-2 py-0.5 border border-${f.sevClass}/40 text-[10px] font-data-label" style="color:var(--x)">SEVERITY: ${f.sev}</span>
-        <span class="px-2 py-0.5 border border-outline-variant bg-surface-container-high text-on-surface-variant text-[10px] font-data-label">REF: ${f.ref}</span>
+        <span class="px-2 py-0.5 border text-[10px] font-data-label" style="color:${p.tone};border-color:${p.tone}66">${p.type}</span>
+        <span class="px-2 py-0.5 border border-outline-variant bg-surface-container-high text-on-surface-variant text-[10px] font-data-label">REF: ${p.ref}</span>
       </div>
-      <p class="text-terminal-code font-terminal-code text-on-surface-variant leading-relaxed flex-1">${f.desc}</p>
+      <p class="text-terminal-code font-terminal-code text-on-surface-variant leading-relaxed flex-1">${p.desc}</p>
       <div class="flex flex-wrap gap-2 mt-4">
-        ${f.tech.map(t=>`<span class="text-[9px] border border-outline-variant px-1.5 py-0.5 text-outline font-data-label">${t}</span>`).join('')}
+        ${p.tech.map(t=>`<span class="text-[9px] border border-outline-variant px-1.5 py-0.5 text-outline font-data-label">${t}</span>`).join('')}
       </div>
-      <a href="${f.link}" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-2 self-start border border-primary/30 px-3 py-1.5 hover:bg-primary/10 transition-all text-primary text-[10px] font-data-label">
+      <a href="${p.link}" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-2 self-start border border-primary/30 px-3 py-1.5 hover:bg-primary/10 transition-all text-primary text-[10px] font-data-label">
         <span class="material-symbols-outlined text-sm">open_in_new</span> INSPECT_EVIDENCE
       </a>
     </div>
   </div>`).join('');
-// color the severity tags
-document.querySelectorAll('#findings-grid span[style]').forEach((el,i)=>{
-  const map={'CRITICAL':'#ffb4ab','HIGH':'#fbbc00','MEDIUM':'#00e639','INFO':'#84967e'};
-  const txt=el.textContent.replace('SEVERITY: ','').trim();
-  el.style.color = map[txt] || '#84967e';
-});
+const tc=document.getElementById('threat-count'); if(tc) tc.textContent=RESUME.projects.length;
+
+/* ===================== VITALS (ROOT) ===================== */
+const vitalsStrip=document.getElementById('vitals-strip');
+vitalsStrip.innerHTML=RESUME.stats.map(s=>`<div class="p-3 md:p-4 text-center"><div class="text-2xl md:text-3xl font-display-lg text-primary-fixed-dim matrix-glow" data-val="${s.value}" data-suf="${s.suffix}">0</div><div class="text-[9px] font-data-label text-outline mt-1 tracking-widest">${s.label}</div></div>`).join('');
+let vitalsAnimated=false;
+function animateVitals(){
+  if(vitalsAnimated) return; vitalsAnimated=true;
+  vitalsStrip.querySelectorAll('[data-val]').forEach(el=>{
+    const target=parseFloat(el.dataset.val), suf=el.dataset.suf, dec=(target%1!==0)?1:0, start=performance.now(), dur=1000;
+    (function f(t){ const p=Math.min(1,(t-start)/dur), e=1-Math.pow(1-p,3); el.textContent=(target*e).toFixed(dec)+suf; if(p<1) requestAnimationFrame(f); else el.textContent=target.toFixed(dec)+suf; })(start);
+  });
+}
+
+/* ===================== DOSSIER (CLEARANCE) ===================== */
+document.getElementById('skills-chips').innerHTML = RESUME.topSkills.map(s=>`<span class="px-2 py-0.5 border border-primary/40 text-[10px] text-primary-fixed-dim bg-primary/5 uppercase">${s}</span>`).join('');
+document.getElementById('experience-box').innerHTML = RESUME.experience.map(e=>`
+  <div class="relative pl-5 border-l border-primary-fixed-dim/40">
+    <div class="absolute -left-1.5 top-1 w-3 h-3 bg-primary-fixed-dim rounded-full shadow-[0_0_8px_#00e639]"></div>
+    <div class="flex flex-wrap items-baseline justify-between gap-2">
+      <span class="text-terminal-bold font-terminal-bold text-primary">${e.role}</span>
+      <span class="text-[9px] font-data-label text-outline">${e.period}</span>
+    </div>
+    <div class="text-[10px] font-data-label text-primary-fixed-dim/80 mb-2">${e.org}</div>
+    <ul class="space-y-1">${e.bullets.map(b=>`<li class="text-[11px] text-on-surface-variant flex gap-2"><span class="text-primary-fixed-dim shrink-0">&rsaquo;</span><span>${b}</span></li>`).join('')}</ul>
+  </div>`).join('');
+document.getElementById('education-box').innerHTML = RESUME.education.map(ed=>`<div class="border border-outline-variant/30 bg-surface-container-low p-3"><div class="text-terminal-bold font-terminal-bold text-primary text-sm">${ed.degree}</div><div class="text-[10px] font-data-label text-outline mt-0.5">${ed.school} &middot; ${ed.period}</div></div>`).join('');
+document.getElementById('certs-box').innerHTML = RESUME.certs.map(c=>`<div class="border border-outline-variant/30 bg-surface-container-low p-2.5"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-primary-fixed-dim">verified</span><span class="text-[11px] font-terminal-bold text-primary">${c.title}</span></div><div class="text-[10px] text-outline mt-1 pl-6">${c.body}</div></div>`).join('');
+document.getElementById('download-resume').addEventListener('click', printResume);
 
 /* ===================== INTERVIEW CHAT ===================== */
 const chatLog = document.getElementById('chat-log');
@@ -842,27 +1053,33 @@ const chatForm = document.getElementById('chat-form');
 const chatInput = document.getElementById('chat-input');
 
 const knowledge = [
-  { k:['hardest','difficult','challenge','complex','proud'],
-    a:`The most complex undertaking was the <span class="text-primary-fixed underline decoration-dotted">AI Security Auditor</span> (V.5.0.1). Challenge: real-time async packet inspection at <span class="text-primary-fixed-dim">sub-50ms latency</span> across high-traffic CRM integrations. Solved via horizontal container scaling + a custom native data-pipeline extension.` },
+  { k:['hardest','difficult','challenge','complex','proud','flagship'],
+    a:`The flagship build is the <span class="text-primary-fixed underline decoration-dotted">AI Financial-Doc Engine</span> at Leadzen.ai — dynamic financial documents for Indian listed companies using <span class="text-primary-fixed-dim">CrewAI</span> agents + LangChain & Hugging Face. Cut report-generation time <span class="text-primary-fixed-dim">50%</span> at <span class="text-primary-fixed-dim">95%+</span> accuracy, on a FastAPI backend.` },
   { k:['stack','tech','technolog','language','tools','python'],
-    a:`Primary weapon: <span class="text-primary-fixed-dim">Python</span>. Stack spans FastAPI, Redis, MongoDB, Kubernetes, PyTorch & Transformers. Disciplines: AI/ML, backend architecture, automation, cybersecurity & cryptography.` },
+    a:`Primary weapon: <span class="text-primary-fixed-dim">Python</span>. Stack: FastAPI, Flask, CrewAI, LangChain, Redis, MongoDB/MySQL, Generative AI. Automation: Selenium, BeautifulSoup, Apps Script, Telegram bots. Security: Burp Suite, nmap, sublist3r, Kali.` },
+  { k:['experience','work history','job','leadzen','career','sde','role'],
+    a:`1+ yr at <span class="text-primary-fixed-dim">Leadzen.ai</span> — Intern &rarr; SDE-1 &rarr; SDE-2. Shipped financial-doc automation, an end-to-end data pipeline for listed companies, and a security audit. Earlier: Research Intern @ PixelNib. See the full timeline in <button data-view="clearance" class="text-primary-fixed-dim underline">CLEARANCE</button>.` },
   { k:['who','about','yourself','name','prajjwal','pyguru','bio'],
-    a:`I'm <span class="text-primary-fixed">Prajjwal Pathak</span>, aka <span class="text-primary-fixed-dim">pyGuru</span> — student, developer & Python instructor. I build AI agents and security tooling, study theoretical physics for fun, and shoot photography. An Otaku & melomaniac at heart.` },
+    a:`I'm <span class="text-primary-fixed">Prajjwal Pathak</span>, aka <span class="text-primary-fixed-dim">pyGuru</span> — Software Engineer (SDE-2), backend + automation + AI agents, and a Python instructor with 20k+ on YouTube. Otaku, melomaniac & Ruskin Bond fan. Building cybiqon.in.` },
   { k:['contact','reach','email','hire','talk','connect','telegram'],
-    a:`Fastest channel is <a href="https://t.me/itspyguru" target="_blank" class="text-primary-fixed-dim underline">Telegram @itspyguru</a>. Also on <a href="https://www.linkedin.com/in/itspyguru/" target="_blank" class="text-primary-fixed-dim underline">LinkedIn</a> and <a href="https://github.com/itspyguru" target="_blank" class="text-primary-fixed-dim underline">GitHub</a>. Hit [ESTABLISH COMMUNICATION] in the CLEARANCE tab.` },
-  { k:['project','work','build','portfolio','github'],
-    a:`Active findings: AI Security Auditor, Resume Analyzer, Workspace Assistant, CRM Email Agent & PDF Research Agent. Open the <button data-view="breach" class="text-primary-fixed-dim underline">FINDINGS LOG</button> to inspect each. Source on <a href="https://github.com/itspyguru" target="_blank" class="text-primary-fixed-dim underline">GitHub</a>.` },
+    a:`Email <a href="mailto:prajjwalpathak35@gmail.com" class="text-primary-fixed-dim underline">prajjwalpathak35@gmail.com</a> or ping <a href="https://t.me/itspyguru" target="_blank" class="text-primary-fixed-dim underline">Telegram @itspyguru</a> (fastest). Also on <a href="https://www.linkedin.com/in/itspyguru/" target="_blank" class="text-primary-fixed-dim underline">LinkedIn</a>. Full details in <button data-view="clearance" class="text-primary-fixed-dim underline">CLEARANCE</button>.` },
+  { k:['project','build','portfolio','github','decrypto','bot'],
+    a:`Projects: AI Financial-Doc Engine, Company Data Pipeline, Web-App Security Audit, Telegram Bot API (3k+ users), Decrypto (PyPI), Gita Shloka Translator & more. Open the <button data-view="breach" class="text-primary-fixed-dim underline">FINDINGS LOG</button>, or run <button data-view="terminal" data-term="ls projects" class="text-primary-fixed-dim underline">ls projects</button> in the terminal.` },
+  { k:['resume','cv','download'],
+    a:`Grab the resume: open the <button data-view="terminal" data-term="cat resume.pdf" class="text-primary-fixed-dim underline">terminal</button> and run <span class="text-primary-fixed-dim">cat resume.pdf</span>, or hit DOWNLOAD_RESUME in <button data-view="clearance" class="text-primary-fixed-dim underline">CLEARANCE</button>.` },
+  { k:['teach','youtube','udemy','course','content','educator'],
+    a:`As <span class="text-primary-fixed-dim">pyGuru</span>: 20,000+ YouTube subscribers, 10,000+ on Telegram, and an Ethical Hacking course on Udemy with 4,500+ enrollments @ 4.7 rating.` },
   { k:['cybiqon','company','startup','venture','2026','goal'],
     a:`2026 mission objective: scaling <a href="https://cybiqon.in" target="_blank" class="text-primary-fixed-dim underline">cybiqon.in</a> to great heights — security & automation, productized.` },
-  { k:['learn','learning','currently','now'],
-    a:`Currently deep in <span class="text-primary-fixed-dim">automation</span> and <span class="text-primary-fixed-dim">cracking</span>, plus self-studying theoretical physics. Always one new thing a day.` },
+  { k:['cert','iit','isro','certification','study','education','degree'],
+    a:`Certified by IIT Kanpur (Cyber Security & Bug Bounty), IIRS/ISRO (Geoprocessing w/ Python), Packt (Flask Full-Stack) & LinkedIn (Unit Testing/TDD). M.Sc + B.Sc Computer Science. Listed in <button data-view="clearance" class="text-primary-fixed-dim underline">CLEARANCE</button>.` },
   { k:['hobby','fun','anime','music','interest','otaku'],
-    a:`Fun fact: melomaniac + Otaku + a fan of Ruskin Bond stories. Into cryptography, design, photography and decoding the universe. 🤣` },
+    a:`Fun fact: melomaniac + Otaku + a fan of Ruskin Bond stories. Into cryptography, design, photography and decoding the universe. &#129315;` },
 ];
 function answerFor(q){
   const s=q.toLowerCase();
   for(const e of knowledge){ if(e.k.some(k=>s.includes(k))) return e.a; }
-  return `Query unrecognized in local cache. Try keywords like <em>"hardest project"</em>, <em>"stack"</em>, <em>"contact"</em> or <em>"cybiqon"</em>. Or reach the human directly via <a href="https://t.me/itspyguru" target="_blank" class="text-primary-fixed-dim underline">Telegram</a>.`;
+  return `Query unrecognized in local cache. Try <em>"hardest project"</em>, <em>"stack"</em>, <em>"experience"</em>, <em>"resume"</em> or <em>"contact"</em>. Or reach the human via <a href="mailto:prajjwalpathak35@gmail.com" class="text-primary-fixed-dim underline">email</a> / <a href="https://t.me/itspyguru" target="_blank" class="text-primary-fixed-dim underline">Telegram</a>.`;
 }
 function pushVisitor(text){
   const div=document.createElement('div');
@@ -922,6 +1139,266 @@ const stLines=["ROOT ACCESS GRANTED...","DECRYPTING hidden_story.txt...","SUCCES
 stContainer.innerHTML = Array.from({length:200},()=>`<div>${stLines[Math.floor(Math.random()*stLines.length)]}</div>`).join('');
 let stPos=0;
 (function st(){ stPos=(stPos+0.4)%200; stContainer.style.transform=`translateY(-${stPos}px)`; requestAnimationFrame(st); })();
+
+/* ===================== TERMINAL ===================== */
+const termOut=document.getElementById('term-output');
+const termForm=document.getElementById('term-form');
+const termInput=document.getElementById('term-input');
+let termReady=false, termHist=[], termHistIdx=0;
+const PROMPT='<span class="text-primary-fixed-dim">prajjwal@os</span><span class="text-outline">:</span><span class="text-tertiary-fixed-dim">~</span><span class="text-outline">$</span> ';
+
+function esc(s){ return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function termWrite(html){ const d=document.createElement('div'); d.className='term-line'; d.innerHTML=html; termOut.appendChild(d); termOut.scrollTop=termOut.scrollHeight; }
+function hdr(t){ return `<span class="text-primary-fixed-dim font-bold">## ${t}</span>\n<span class="text-outline">${'─'.repeat(46)}</span>`; }
+
+function buildResume(){
+  const r=RESUME;
+  const lines=[];
+  lines.push(`<span class="text-primary-fixed-dim font-bold">${r.name.toUpperCase()}  //  ${r.alias}</span>`);
+  lines.push(`<span class="text-on-surface">${r.title}</span>`);
+  lines.push(`<span class="text-outline">${r.email}  ·  ${r.location}</span>`);
+  lines.push(`<span class="text-outline">github.com/itspyguru  ·  linkedin.com/in/itspyguru</span>`);
+  lines.push('');
+  lines.push(hdr('OBJECTIVE')); lines.push(r.objective); lines.push('');
+  lines.push(hdr('EXPERIENCE'));
+  r.experience.forEach(e=>{
+    lines.push(`<span class="text-primary">${e.role}</span> <span class="text-outline">@</span> <span class="text-primary-fixed-dim">${e.org}</span>  <span class="text-outline">(${e.period})</span>`);
+    e.bullets.forEach(b=> lines.push('  <span class="text-primary-fixed-dim">•</span> '+b));
+    lines.push('');
+  });
+  lines.push(hdr('SKILLS'));
+  Object.entries(r.skills).forEach(([k,v])=> lines.push(`<span class="text-primary-fixed-dim">${(k+':').padEnd(24)}</span>${v.join(', ')}`));
+  lines.push('');
+  lines.push(hdr('PROJECTS'));
+  r.projects.forEach(p=> lines.push(`<span class="text-primary">${p.title}</span> <span class="text-outline">[${p.type}]</span> — ${p.desc}`));
+  lines.push('');
+  lines.push(hdr('EDUCATION'));
+  r.education.forEach(e=> lines.push(`${e.degree} — ${e.school} <span class="text-outline">(${e.period})</span>`));
+  lines.push('');
+  lines.push(hdr('CERTIFICATIONS'));
+  r.certs.forEach(c=> lines.push(`<span class="text-primary-fixed-dim">•</span> ${c.title} — <span class="text-outline">${c.body}</span>`));
+  lines.push('');
+  lines.push(hdr('EXTRA-CURRICULAR'));
+  r.extras.forEach(x=> lines.push('  <span class="text-primary-fixed-dim">•</span> '+x));
+  lines.push('');
+  lines.push(`<span class="text-outline">Tip: run </span><span class="text-primary-fixed-dim">download resume</span><span class="text-outline"> to save a PDF.</span>`);
+  return lines.join('\n');
+}
+function listProjects(){
+  return 'total '+RESUME.projects.length+'\n'+RESUME.projects.map(p=>
+    `<span class="text-tertiary-fixed-dim">${p.slug.padEnd(20)}</span><span class="text-outline">[${p.type}]</span>  ${p.title}`).join('\n')
+    +`\n\n<span class="text-outline">Use: cat projects/&lt;name&gt;</span>`;
+}
+function projectDetail(slug){
+  const p=RESUME.projects.find(x=>x.slug===slug||x.title.toLowerCase()===slug.toLowerCase());
+  if(!p) return `<span class="text-error">cat: projects/${esc(slug)}: No such project</span>\nRun <span class="text-primary-fixed-dim">ls projects</span>.`;
+  return [
+    `<span class="text-primary font-bold">${p.title}</span>  <span class="text-outline">[${p.type}]</span>`,
+    `<span class="text-outline">ref:</span> ${p.ref}`,
+    '',
+    p.desc,
+    '',
+    `<span class="text-outline">tech:</span> ${p.tech.join(', ')}`,
+    `<span class="text-outline">link:</span> <a href="${p.link}" target="_blank" class="text-primary-fixed-dim underline">${p.link}</a>`
+  ].join('\n');
+}
+function catExperience(){
+  return RESUME.experience.map(e=>
+    `<span class="text-primary">${e.role}</span> <span class="text-outline">@ ${e.org} (${e.period})</span>\n`+
+    e.bullets.map(b=>'  <span class="text-primary-fixed-dim">•</span> '+b).join('\n')
+  ).join('\n\n');
+}
+function catSkills(){
+  return Object.entries(RESUME.skills).map(([k,v])=>`<span class="text-primary-fixed-dim">${(k+':').padEnd(24)}</span>${v.join(', ')}`).join('\n');
+}
+function catEducation(){ return RESUME.education.map(e=>`${e.degree} — ${e.school} <span class="text-outline">(${e.period})</span>`).join('\n'); }
+function catCerts(){ return RESUME.certs.map(c=>`<span class="text-primary-fixed-dim">•</span> <span class="text-primary">${c.title}</span>\n  <span class="text-outline">${c.body}</span>`).join('\n'); }
+function catContact(){
+  return [
+    `<span class="text-outline">email   :</span> <a href="mailto:${RESUME.email}" class="text-primary-fixed-dim underline">${RESUME.email}</a>`,
+    `<span class="text-outline">telegram:</span> <a href="${LINKS.telegram}" target="_blank" class="text-primary-fixed-dim underline">@itspyguru</a> (fastest)`,
+    `<span class="text-outline">linkedin:</span> <a href="${LINKS.linkedin}" target="_blank" class="text-primary-fixed-dim underline">in/itspyguru</a>`,
+    `<span class="text-outline">github  :</span> <a href="${LINKS.github}" target="_blank" class="text-primary-fixed-dim underline">github.com/itspyguru</a>`,
+    `<span class="text-outline">location:</span> ${RESUME.location}`
+  ].join('\n');
+}
+function catSocials(){
+  const m=[['github',LINKS.github],['linkedin',LINKS.linkedin],['youtube',LINKS.youtube],['telegram',LINKS.telegram],['instagram',LINKS.instagram],['pinterest',LINKS.pinterest],['cybiqon',LINKS.cybiqon]];
+  return m.map(([k,u])=>`<span class="text-tertiary-fixed-dim">${k.padEnd(11)}</span><a href="${u}" target="_blank" class="text-primary-fixed-dim underline">${u}</a>`).join('\n')
+    +`\n\n<span class="text-outline">Use: open &lt;name&gt;  (e.g. open github)</span>`;
+}
+function neofetch(){
+  const logo=[
+"   <span class=\"text-primary-fixed-dim\">_ __  _   _ </span>",
+"  <span class=\"text-primary-fixed-dim\">| '_ \\| | | |</span>   <span class=\"text-primary\">prajjwal@prajjwal-os</span>",
+"  <span class=\"text-primary-fixed-dim\">| |_) | |_| |</span>   <span class=\"text-outline\">----------------------</span>",
+"  <span class=\"text-primary-fixed-dim\">| .__/ \\__, |</span>   OS:       PrajjwalOS v3.0",
+"  <span class=\"text-primary-fixed-dim\">|_|    |___/ </span>   Role:     SDE-2 @ Leadzen.ai",
+"               Shell:    bash",
+"               Stack:    FastAPI · CrewAI · LangChain · Redis",
+"               Langs:    Python · JavaScript · C#",
+"               Projects: "+RESUME.projects.length+" deployed",
+"               Teaching: 20k+ YouTube · 4.5k+ Udemy",
+"               Contact:  prajjwalpathak35@gmail.com"
+  ];
+  return logo.join('\n');
+}
+function cmdHelp(){
+  return [
+    '<span class="text-primary-fixed-dim font-bold">AVAILABLE COMMANDS</span>',
+    '<span class="text-tertiary-fixed-dim">cat resume.pdf</span>      print the full resume',
+    '<span class="text-tertiary-fixed-dim">download resume</span>     save resume as PDF',
+    '<span class="text-tertiary-fixed-dim">ls</span> / <span class="text-tertiary-fixed-dim">ls projects</span>      list files / projects',
+    '<span class="text-tertiary-fixed-dim">cat projects/&lt;name&gt;</span>  open a project',
+    '<span class="text-tertiary-fixed-dim">experience</span>          work history',
+    '<span class="text-tertiary-fixed-dim">skills</span>              tech stack',
+    '<span class="text-tertiary-fixed-dim">education</span> / <span class="text-tertiary-fixed-dim">certs</span>   credentials',
+    '<span class="text-tertiary-fixed-dim">whoami</span> / <span class="text-tertiary-fixed-dim">whois</span>      short / long bio',
+    '<span class="text-tertiary-fixed-dim">contact</span> / <span class="text-tertiary-fixed-dim">socials</span>    how to reach me',
+    '<span class="text-tertiary-fixed-dim">open &lt;name&gt;</span>         open a link (github, linkedin...)',
+    '<span class="text-tertiary-fixed-dim">neofetch</span>            system info',
+    '<span class="text-tertiary-fixed-dim">clear</span> · <span class="text-tertiary-fixed-dim">date</span> · <span class="text-tertiary-fixed-dim">echo</span> · <span class="text-tertiary-fixed-dim">history</span>',
+    '<span class="text-outline">also: sudo hire-me · ↑/↓ history · Tab autocomplete</span>'
+  ].join('\n');
+}
+function cmdCat(arg){
+  const a=(arg||'').trim().toLowerCase();
+  if(!a) return '<span class="text-error">usage: cat &lt;file&gt;</span>  (try: cat resume.pdf)';
+  if(a==='resume.pdf'||a==='resume.txt'||a==='resume') return buildResume();
+  if(a.startsWith('projects/')) return projectDetail(arg.trim().slice(9));
+  if(a==='experience'||a==='experience.log') return catExperience();
+  if(a==='skills'||a==='skills.txt') return catSkills();
+  if(a==='education') return catEducation();
+  if(a==='certs'||a==='certifications') return catCerts();
+  if(a==='contact'||a==='contact.txt') return catContact();
+  return `<span class="text-error">cat: ${esc(arg)}: No such file</span>  (try: ls)`;
+}
+function cmdLs(arg){
+  const a=(arg||'').trim().toLowerCase().replace(/\/$/,'');
+  if(!a||a==='.'||a==='~'||a==='-la'||a==='-a') return [
+    '<span class="text-primary-fixed-dim">projects/</span>   <span class="text-primary-fixed-dim">experience/</span>   <span class="text-primary-fixed-dim">skills/</span>',
+    '<span class="text-primary-fixed-dim">education/</span>  <span class="text-primary-fixed-dim">certs/</span>        <span class="text-tertiary-fixed-dim">resume.pdf</span>',
+    '<span class="text-tertiary-fixed-dim">contact.txt</span>'
+  ].join('\n');
+  if(a==='projects') return listProjects();
+  if(a==='certs'||a==='certifications') return catCerts();
+  return `<span class="text-error">ls: ${esc(arg)}: No such directory</span>`;
+}
+function cmdOpen(arg){
+  const k=(arg||'').trim().toLowerCase();
+  const map={github:LINKS.github,linkedin:LINKS.linkedin,youtube:LINKS.youtube,yt:LINKS.youtube,telegram:LINKS.telegram,tg:LINKS.telegram,instagram:LINKS.instagram,ig:LINKS.instagram,pinterest:LINKS.pinterest,cybiqon:LINKS.cybiqon,udemy:LINKS.udemy,pypi:LINKS.pypi,decrypto:LINKS.pypi,email:LINKS.email,resume:null};
+  if(k==='resume'){ printResume(); return '<span class="text-primary-fixed-dim">Opening print dialog…</span>'; }
+  if(!(k in map)) return `<span class="text-error">open: unknown target '${esc(arg)}'</span>  (try: open github)`;
+  window.open(map[k],'_blank'); return `<span class="text-primary-fixed-dim">Opening ${k}…</span>`;
+}
+function cmdSudo(arg){
+  const a=(arg||'').trim().toLowerCase();
+  if(a.startsWith('hire')) return [
+    '<span class="text-primary-fixed-dim font-bold">[ RECRUITMENT PROTOCOL INITIATED ]</span>',
+    'Subject flagged: <span class="text-primary">EXCEPTIONAL BUILDER</span> — immediate recruitment advised.',
+    `→ email: <a href="mailto:${RESUME.email}" class="text-primary-fixed-dim underline">${RESUME.email}</a>`,
+    `→ telegram: <a href="${LINKS.telegram}" target="_blank" class="text-primary-fixed-dim underline">@itspyguru</a>`,
+    '<span class="text-tertiary-fixed-dim">access granted. ☺</span>'
+  ].join('\n');
+  if(a.includes('rm')&&a.includes('-rf')) return '<span class="text-error">nope. nice try — this OS protects its operator. \u{1f6e1}</span>';
+  return `<span class="text-error">[sudo] permission denied:</span> ${esc(arg||'(nothing)')}`;
+}
+function runCommand(raw, echo){
+  termInit();
+  const input=(raw||'').trim();
+  if(echo!==false) termWrite(PROMPT+'<span class="text-on-surface">'+esc(input)+'</span>');
+  if(input===''){ return; }
+  if(termHist[termHist.length-1]!==input) termHist.push(input);
+  termHistIdx=termHist.length;
+  const parts=input.split(/\s+/); const cmd=parts[0].toLowerCase(); const arg=parts.slice(1).join(' ');
+  let out;
+  switch(cmd){
+    case 'help': case '?': case 'man': out=cmdHelp(); break;
+    case 'cat': out=cmdCat(arg); break;
+    case 'resume': out=(arg==='--pdf')?(printResume(),'<span class="text-primary-fixed-dim">Opening print dialog…</span>'):buildResume(); break;
+    case 'ls': case 'dir': out=cmdLs(arg); break;
+    case 'whoami': out='<span class="text-primary">'+RESUME.bioShort+'</span>'; break;
+    case 'whois': out=RESUME.bioLong; break;
+    case 'experience': case 'exp': out=catExperience(); break;
+    case 'skills': out=catSkills(); break;
+    case 'education': case 'edu': out=catEducation(); break;
+    case 'certs': case 'certifications': out=catCerts(); break;
+    case 'projects': out=listProjects(); break;
+    case 'contact': out=catContact(); break;
+    case 'socials': case 'links': out=catSocials(); break;
+    case 'open': out=cmdOpen(arg); break;
+    case 'download': out=(arg.toLowerCase().includes('resume')||arg==='')?(printResume(),'<span class="text-primary-fixed-dim">Opening print dialog… choose “Save as PDF”.</span>'):'usage: download resume'; break;
+    case 'neofetch': case 'screenfetch': out=neofetch(); break;
+    case 'date': out=new Date().toString(); break;
+    case 'pwd': out='/home/prajjwal/root'; break;
+    case 'echo': out=esc(arg); break;
+    case 'history': out=termHist.map((h,i)=>`  ${(i+1).toString().padStart(3)}  ${esc(h)}`).join('\n')||'(empty)'; break;
+    case 'clear': case 'cls': termOut.innerHTML=''; return;
+    case 'sudo': out=cmdSudo(arg); break;
+    case 'hire': case 'hire-me': out=cmdSudo('hire-me'); break;
+    case 'hack': case 'matrix': out='<span class="text-primary-fixed-dim">breaching… '+'10'.repeat(18)+' ACCESS GRANTED. (kidding \u{1f600})</span>'; break;
+    case 'exit': case 'logout': out='<span class="text-outline">There is no escape from PrajjwalOS. Try the START menu instead.</span>'; break;
+    default: out=`<span class="text-error">command not found: ${esc(cmd)}</span> — type <span class="text-primary-fixed-dim">help</span>`;
+  }
+  if(out!=null) termWrite(out);
+}
+function termAutocomplete(){
+  const v=termInput.value; const t=v.trim();
+  const cmds=['help','cat resume.pdf','cat projects/','ls','ls projects','experience','skills','education','certs','projects','whoami','whois','contact','socials','open ','neofetch','download resume','history','clear','sudo hire-me','date','echo '];
+  if(t.startsWith('cat projects/')){
+    const frag=t.slice(13).toLowerCase();
+    const m=RESUME.projects.map(p=>p.slug).filter(s=>s.startsWith(frag));
+    if(m.length===1){ termInput.value='cat projects/'+m[0]; return; }
+    if(m.length>1){ termWrite(PROMPT+esc(t)); termWrite(m.join('   ')); return; }
+  }
+  const matches=cmds.filter(c=>c.startsWith(t.toLowerCase()));
+  if(matches.length===1) termInput.value=matches[0];
+  else if(matches.length>1){ termWrite(PROMPT+esc(t)); termWrite(matches.join('   ')); }
+}
+function termInit(){
+  if(termReady) return; termReady=true;
+  termWrite(neofetch());
+  termWrite('');
+  termWrite('<span class="text-outline">Welcome to PrajjwalOS shell. Type </span><span class="text-primary-fixed-dim">help</span><span class="text-outline"> to list commands, or </span><span class="text-primary-fixed-dim">cat resume.pdf</span><span class="text-outline">.</span>');
+  // command chips
+  const chips=['help','cat resume.pdf','ls projects','experience','skills','neofetch','sudo hire-me','contact'];
+  const wrap=document.getElementById('term-chips');
+  wrap.innerHTML=chips.map(c=>`<button class="term-chip text-[9px] border border-primary/30 px-2 py-1 text-primary hover:bg-primary/10 font-data-label" data-cmd="${c}">${c}</button>`).join('');
+  wrap.querySelectorAll('.term-chip').forEach(b=> b.addEventListener('click', ()=>{ runCommand(b.dataset.cmd); termInput.focus(); }));
+}
+termForm.addEventListener('submit', e=>{ e.preventDefault(); const v=termInput.value; termInput.value=''; runCommand(v); });
+termInput.addEventListener('keydown', e=>{
+  if(e.key==='ArrowUp'){ e.preventDefault(); if(termHist.length){ termHistIdx=Math.max(0,termHistIdx-1); termInput.value=termHist[termHistIdx]||''; } }
+  else if(e.key==='ArrowDown'){ e.preventDefault(); if(termHist.length){ termHistIdx=Math.min(termHist.length,termHistIdx+1); termInput.value=termHist[termHistIdx]||''; } }
+  else if(e.key==='Tab'){ e.preventDefault(); termAutocomplete(); }
+});
+document.getElementById('term-clear').addEventListener('click', ()=>{ termOut.innerHTML=''; termInput.focus(); });
+document.getElementById('view-terminal').addEventListener('click', e=>{ if(!e.target.closest('a,button,input')) termInput.focus(); });
+
+/* ===================== PRINT-TO-PDF RESUME ===================== */
+function buildPrintResume(){
+  if(document.getElementById('resume-print')) return;
+  const r=RESUME, h=[];
+  const sec=t=>`<h2 style="font-size:12px;border-bottom:1px solid #000;margin:13px 0 4px;padding-bottom:2px;text-transform:uppercase;letter-spacing:1px;">${t}</h2>`;
+  h.push(`<h1 style="margin:0;font-size:21px;letter-spacing:1px;">${r.name.toUpperCase()}</h1>`);
+  h.push(`<div style="font-size:11px;margin:2px 0 1px;font-weight:bold;">${r.title}</div>`);
+  h.push(`<div style="font-size:10px;color:#333;">${r.email} &nbsp;&middot;&nbsp; ${r.location} &nbsp;&middot;&nbsp; github.com/itspyguru &nbsp;&middot;&nbsp; linkedin.com/in/itspyguru</div>`);
+  h.push(sec('Objective')); h.push(`<p style="margin:0;">${r.objective}</p>`);
+  h.push(sec('Experience'));
+  r.experience.forEach(e=>{ h.push(`<div style="margin-top:7px;"><strong>${e.role}</strong> &mdash; ${e.org} <span style="float:right;color:#444;">${e.period}</span></div>`); h.push('<ul style="margin:2px 0 0;padding-left:16px;">'+e.bullets.map(b=>`<li>${b}</li>`).join('')+'</ul>'); });
+  h.push(sec('Skills'));
+  h.push('<ul style="margin:0;padding-left:16px;">'+Object.entries(r.skills).map(([k,v])=>`<li><strong>${k}:</strong> ${v.join(', ')}</li>`).join('')+'</ul>');
+  h.push(sec('Projects'));
+  h.push('<ul style="margin:0;padding-left:16px;">'+r.projects.map(p=>`<li><strong>${p.title}</strong> &mdash; ${p.desc}</li>`).join('')+'</ul>');
+  h.push(sec('Education'));
+  h.push('<ul style="margin:0;padding-left:16px;">'+r.education.map(e=>`<li>${e.degree} &mdash; ${e.school} (${e.period})</li>`).join('')+'</ul>');
+  h.push(sec('Certifications'));
+  h.push('<ul style="margin:0;padding-left:16px;">'+r.certs.map(c=>`<li><strong>${c.title}</strong> &mdash; ${c.body}</li>`).join('')+'</ul>');
+  h.push(sec('Extra-Curricular'));
+  h.push('<ul style="margin:0;padding-left:16px;">'+r.extras.map(x=>`<li>${x}</li>`).join('')+'</ul>');
+  const d=document.createElement('div'); d.id='resume-print'; d.innerHTML=h.join(''); document.body.appendChild(d);
+}
+function printResume(){ buildPrintResume(); window.print(); }
 
 /* ===================== INIT ===================== */
 showView( (location.hash||'#root').slice(1) );
