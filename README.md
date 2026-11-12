@@ -1,73 +1,60 @@
-## Konnichiwa <img src="https://github.com/TheDudeThatCode/TheDudeThatCode/blob/master/Assets/Hi.gif" width="29px" height=29 align=left>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/run-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/run-light.svg">
+  <img alt="pyGuru Run: my last year of GitHub contributions drawn as platforms on the Varanasi ghats, with a pixel runner hopping across them" src="assets/run-dark.svg" width="100%">
+</picture>
 
-[![Linkedin Badge](https://img.shields.io/badge/-LinkedIn-0e76a8?style=flat-square&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/itspyguru/)
-[![Youtube Badge](https://img.shields.io/badge/-youtube-ff0000?style=flat-square&logo=youtube&logoColor=white)](https://www.youtube.com/@itspyguru)
-[![Instagram Badge](https://img.shields.io/badge/-Instagram-e4405f?style=flat-square&logo=Instagram&logoColor=white)](https://www.instagram.com/itspyguru/)
-[![Telegram Badge](https://img.shields.io/badge/-Telegram-0088cc?style=flat-square&logo=Telegram&logoColor=white)](https://t.me/itspyguru)
-[![Pinterest Badge](https://img.shields.io/badge/Pinterest-E8175D?style=flat-square&logo=pinterest&logoColor=white)](https://www.pinterest.ca/itspyguru)
+<p align="center">
+  <b>Player 1: Prajjwal Pathak, aka pyGuru</b> · Varanasi, India
+</p>
 
-#### I'm Prajjwal aka pyGuru,
+I make games in Python, build backend systems from scratch on
+[YouTube](https://www.youtube.com/@itspyguru), and run [Cybiqon](https://cybiqon.in),
+a small software studio that makes websites, apps and AI automation.
 
-Welcome to my little space on Github. Here i put my thoughts and ideas into code.
+Each column in the level above is one week of my last year on GitHub. Taller means more
+commits; the coins sit on my five biggest weeks. The level is redrawn every night, so
+the runner always plays the current year.
 
-- 🔭 Primary Coding language : Python
-- 🌱 Currently learning Automation and Cracking
-- 👯 I’m looking to collaborate with other programmers
-- 🥅 2026 Goals: Taking [cybiqon.in](https://cybiqon.in) to great heights
-- 📫 How to reach me : The fastest way to reach me is by Telegram
+### 🕹️ Pick a cartridge
 
-- ⚡ Fun fact : I am a melomaniac, an Otaku and a fan of Ruskin Bond Stories 🤣.
+<p align="center">
+  <a href="https://github.com/itspyguru/Python-Games"><img src="assets/cart-python-games.svg" width="30%" alt="Python-Games"></a>
+  <a href="https://github.com/itspyguru/Python-on-WhatsApp"><img src="assets/cart-python-on-whatsapp.svg" width="30%" alt="Python-on-WhatsApp"></a>
+  <a href="https://github.com/itspyguru/python-from-scratch"><img src="assets/cart-python-from-scratch.svg" width="30%" alt="python-from-scratch"></a>
+</p>
+<p align="center">
+  <a href="https://github.com/itspyguru/Python-Projects"><img src="assets/cart-python-projects.svg" width="30%" alt="Python-Projects"></a>
+  <a href="https://github.com/itspyguru/Tkinter-Applications"><img src="assets/cart-tkinter-applications.svg" width="30%" alt="Tkinter-Applications"></a>
+  <a href="https://github.com/itspyguru/Decrypto"><img src="assets/cart-decrypto.svg" width="30%" alt="Decrypto"></a>
+</p>
+
+### 💾 Now playing
+
+<!-- NOW:START -->
+- ▸ **[python-from-scratch](https://github.com/itspyguru/python-from-scratch)** · Backend systems built from scratch in Python, one folder per itsPyguru video: Redis-style cache, load balancer · <sub>saved 11 days ago</sub>
+- ▸ **[python-load-balancer-health-checks](https://github.com/itspyguru/python-load-balancer-health-checks)** · A Python load balancer from scratch: round-robin across 3 FastAPI backends, a background health-check loop, and a real kill-a-server test · <sub>saved 18 days ago</sub>
+- ▸ **[Agentic-AI-projects](https://github.com/itspyguru/Agentic-AI-projects)** · An end to end agenetic ai assitant built with langchain & streamlit · <sub>saved 154 days ago</sub>
+<!-- NOW:END -->
+
+### 🎮 Controls
+
+<p align="center">
+  <a href="https://www.youtube.com/@itspyguru">▶ YouTube</a> &nbsp;·&nbsp;
+  <a href="https://www.instagram.com/itspyguru/">◆ Instagram</a> &nbsp;·&nbsp;
+  <a href="https://www.linkedin.com/in/itspyguru/">■ LinkedIn</a> &nbsp;·&nbsp;
+  <a href="https://t.me/itspyguru">● Telegram</a> (fastest way to reach me)
+</p>
 
 <details>
-	<summary>Interested in knowing more about me 👇 </summary>
+  <summary>🔒 Secret level</summary>
+  <br>
+  <img alt="Hououin Kyouma" align="right" width="220" src="assets/madScientist.gif">
 
-  <br />
-  <img alt="Hououin Kyoma" align="right" src="https://github.com/itspyguru/itspyguru/blob/main/assets/madScientist.gif">
-
-  I'm a Student, Developer, and Python Instructor. I like programming, 
-  cryptography and designing. I am interested in extra-terrestrials and 
-  trying to understand our universe, studying theoretical physics by my own. 
-  I like photography and collecting pictures. A simple and down to 
-  earth boy who is so keen to learn every day a new thing. 
-  <br />
-  <p align="center">
-    <img src="https://readme-typing-svg.herokuapp.com?lines=I+Love+Python;I'm+passionate+about+ML;I+love+making+Games+and+Apps;&width=400&height=50">
-  </p>
-  
+  - Melomaniac, otaku, and a fan of Ruskin Bond's stories.
+  - I read theoretical physics for fun and think about what else is out there in the cosmos.
+  - I like photography, cryptography and designing things.
+  - El Psy Kongroo.
 </details>
 
-<details>
-	<summary> ⚡ Github Stats </summary>
-	<br />
-
-<div style="display:flex; flex-flow: column wrap;">
-	<div style="width:50%">
-	  	<a href="https://github.com/itspyguru">
-	    		<img src="https://github-readme-stats.vercel.app/api?username=itspyguru&show_icons=true&hide=&count_private=true&title_color=0D1117&text_color=50c878&icon_color=00FFFF&bg_color=0D1117&hide_border=true&show_icons=true" alt="Prajjwal's GitHub stats"/>
-	 	 </a>
-	</div>
-	<div style="width:50%">
-	    <a href="https://github.com/itspyguru">
-		<img src="https://github-readme-streak-stats.herokuapp.com/?user=itspyguru&stroke=ffffff&background=0D1117&ring=e2fdff&fire=14FE64&currStreakNum=e2fdff&currStreakLabel=e2fdff&sideNums=e2fdff&sideLabels=50c878&dates=50c878&hide_border=true" />
-	    </a>
-        </div>
-</div>
-
-![Profile views](https://komarev.com/ghpvc/?username=itspyguru&label=PROFILE+VIEWS&style=flat-square) 
-![GitHub followers](https://img.shields.io/github/followers/itspyguru?style=social)
-</details>
-
-#
-
-<div align="center">
-
-### Show some ❤️ by starring some of the repositories!
-
-</div>
-
-<!-- links -->
-
-[Cybiqon]: https://cybiqon.in
-[youtube]: https://www.youtube.com/c/itspyguru
-[instagram]: https://www.instagram.com/itspyguru
-[pinterest]: https://www.pinterest.ca/prajjwalpathak3 
+<sub>The header and cartridges are plain SVGs drawn by <a href="scripts/build.py">scripts/build.py</a> (Python, no dependencies) and refreshed daily by a GitHub Action. No third-party stats services.</sub>
