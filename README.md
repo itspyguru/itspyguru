@@ -32,9 +32,9 @@ the runner always plays the current year.
 ### 💾 Now playing
 
 <!-- NOW:START -->
-- ▸ **[python-from-scratch](https://github.com/itspyguru/python-from-scratch)** · Backend systems built from scratch in Python, one folder per itsPyguru video: Redis-style cache, load balancer · <sub>saved 23 days ago</sub>
-- ▸ **[python-load-balancer-health-checks](https://github.com/itspyguru/python-load-balancer-health-checks)** · A Python load balancer from scratch: round-robin across 3 FastAPI backends, a background health-check loop, and a real kill-a-server test · <sub>saved 29 days ago</sub>
-- ▸ **[Agentic-AI-projects](https://github.com/itspyguru/Agentic-AI-projects)** · An end to end agenetic ai assitant built with langchain & streamlit · <sub>saved 165 days ago</sub>
+- ▸ **[python-from-scratch](https://github.com/itspyguru/python-from-scratch)** · Backend systems built from scratch in Python, one folder per itsPyguru video: Redis-style cache, load balancer · <sub>saved 24 days ago</sub>
+- ▸ **[python-load-balancer-health-checks](https://github.com/itspyguru/python-load-balancer-health-checks)** · A Python load balancer from scratch: round-robin across 3 FastAPI backends, a background health-check loop, and a real kill-a-server test · <sub>saved 30 days ago</sub>
+- ▸ **[Agentic-AI-projects](https://github.com/itspyguru/Agentic-AI-projects)** · An end to end agenetic ai assitant built with langchain & streamlit · <sub>saved 166 days ago</sub>
 <!-- NOW:END -->
 
 ### 🎮 Controls
