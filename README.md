@@ -33,8 +33,8 @@ the runner always plays the current year.
 
 <!-- NOW:START -->
 - ▸ **[python-from-scratch](https://github.com/itspyguru/python-from-scratch)** · Backend systems built from scratch in Python, one folder per itsPyguru video: Redis-style cache, load balancer · <sub>saved today</sub>
-- ▸ **[python-load-balancer-health-checks](https://github.com/itspyguru/python-load-balancer-health-checks)** · A Python load balancer from scratch: round-robin across 3 FastAPI backends, a background health-check loop, and a real kill-a-server test · <sub>saved 32 days ago</sub>
-- ▸ **[Agentic-AI-projects](https://github.com/itspyguru/Agentic-AI-projects)** · An end to end agenetic ai assitant built with langchain & streamlit · <sub>saved 168 days ago</sub>
+- ▸ **[python-load-balancer-health-checks](https://github.com/itspyguru/python-load-balancer-health-checks)** · A Python load balancer from scratch: round-robin across 3 FastAPI backends, a background health-check loop, and a real kill-a-server test · <sub>saved 33 days ago</sub>
+- ▸ **[Agentic-AI-projects](https://github.com/itspyguru/Agentic-AI-projects)** · An end to end agenetic ai assitant built with langchain & streamlit · <sub>saved 169 days ago</sub>
 <!-- NOW:END -->
 
 ### 🎮 Controls
